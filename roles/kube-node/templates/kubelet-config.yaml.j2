@@ -26,6 +26,7 @@ clusterDomain: {{ CLUSTER_DNS_DOMAIN }}
 configMapAndSecretChangeDetectionStrategy: Watch
 containerLogMaxFiles: 3 
 containerLogMaxSize: 10Mi
+containerRuntimeEndpoint: unix://{{ CONTAINERD_STATE_DIR }}/containerd.sock
 enforceNodeAllocatable:
 - pods
 {% if KUBE_RESERVED_ENABLED == "yes" %}
@@ -42,6 +43,7 @@ evictionHard:
   nodefs.available: 10%
   nodefs.inodesFree: 5%
 evictionPressureTransitionPeriod: 5m0s
+failCgroupV1: true
 failSwapOn: true
 fileCheckFrequency: 40s
 hairpinMode: hairpin-veth 
