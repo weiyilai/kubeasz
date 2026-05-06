@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  gorelease:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: docs/release-notes/kubeasz-${{ github.ref_name }}.md
+          files: |
+            ezdown
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}%
